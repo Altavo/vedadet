@@ -30,7 +30,6 @@ def make_cuda_ext(name, module, sources, sources_cuda=[]):
     else:
         print(f'Compiling {name} without CUDA')
         extension = CppExtension
-        raise EnvironmentError('CUDA is required to compile vedadet')
 
     return extension(
         name=f'{module}.{name}',
