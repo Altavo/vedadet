@@ -9,7 +9,7 @@ from .base_detector import BaseDetector
 @registry.register_module('detector')
 class SingleStageDetector(BaseDetector):
 
-    def __init__(self, backbone, head, neck=None):
+    def __init__(self, backbone, head, device, neck=None):
         super().__init__()
         self.backbone = build_backbone(backbone)
         if neck:
