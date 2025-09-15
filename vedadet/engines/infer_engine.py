@@ -33,6 +33,7 @@ class InferEngine(BaseEngine):
             dets(list): len(dets) is the batch size, len(dets[ii]) = #classes,
                 dets[ii][jj] is an np.array whose shape is N*5
         """
+        assert img.ndim == 4, f'img must be 4-dim, got {img.ndim}-dim'
         feats = self.extract_feats(img)
 
         featmap_sizes = [feat.shape[-2:] for feat in feats[0]]
@@ -54,6 +55,7 @@ class InferEngine(BaseEngine):
             dets(list): len(dets) is the batch size, len(dets[ii]) = #classes,
                 dets[ii][jj] is an np.array whose shape is N*5
         """
+        assert img.ndim == 4, f'img must be 4-dim, got {img.ndim}-dim'
         dets = self._get_raw_dets(img, img_metas)
         batch_size = len(dets)
 
@@ -112,6 +114,7 @@ class InferEngine(BaseEngine):
 
     def infer(self, img, img_metas):
         if len(img) == 1:
-            return self._simple_infer(img[0], img_metas[0])
+            # return self._simple_infer(img[0], img_metas[0])
+            return self._simple_infer(img, img_metas[0])
         else:
             return self._aug_infer(img, img_metas)
