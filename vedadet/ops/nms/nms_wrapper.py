@@ -54,7 +54,11 @@ def nms(dets, iou_thr, device_id=None):
         if dets_th.is_cuda:
             inds = nms_ext.nms(dets_th, iou_thr)
         else:
+            device = dets_th.device
+            dets_th = dets_th.cpu()
             inds = nms_ext.nms(dets_th, iou_thr)
+            dets_th = dets_th.to(device) # required for mps device
+            
 
     if is_numpy:
         inds = inds.cpu().numpy()
