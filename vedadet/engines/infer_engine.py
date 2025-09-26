@@ -114,7 +114,6 @@ class InferEngine(BaseEngine):
 
     def infer(self, img, img_metas):
         if len(img) == 1:
-            # return self._simple_infer(img[0], img_metas[0])
-            return self._simple_infer(img, img_metas[0])
+            return self._simple_infer(img[0], img_metas[0])
         else:
             return self._aug_infer(img, img_metas)
