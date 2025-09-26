@@ -19,6 +19,7 @@ def make_cuda_ext(name, module, sources, sources_cuda=[]):
     extra_compile_args = {'cxx': []}
 
     if torch.cuda.is_available() or os.getenv('FORCE_CUDA', '0') == '1':
+        print(f"Compiling {name} with CUDA")
         define_macros += [('WITH_CUDA', None)]
         extension = CUDAExtension
         extra_compile_args['nvcc'] = [
